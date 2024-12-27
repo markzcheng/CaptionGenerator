@@ -5,4 +5,4 @@ Captions/*
 Audios/*
 !Audios/.gitkeep
 
-venv
+/venv
