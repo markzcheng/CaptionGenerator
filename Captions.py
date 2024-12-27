@@ -1,6 +1,9 @@
 from moviepy import VideoFileClip
 import whisper
 import pysrt
+import tkinter as tk
+from tkinter import scrolledtext
+from Editor import CaptionEditor
 
 # video_path = input path for where video is stored
 # audio_path = output path for where the audio will be stored
@@ -51,8 +54,33 @@ def video_to_captions(video_path, audio_path, srt_path):
    transcription, segments = transcribe_audio(audio_path)
    save_as_srt(segments, srt_path)
 
-if __name__ == "__main__":
+def run_gui():
+   # Create the main application window
+    root = tk.Tk()
+    root.title("Caption Editor")
+    app = CaptionEditor(root)
+
+    # Create a menu bar
+    menu_bar = tk.Menu(root)
+    file_menu = tk.Menu(menu_bar, tearoff=0)
+    file_menu.add_command(label="Open", command=app.open_file)
+    file_menu.add_command(label="Save", command=app.save_file)
+    menu_bar.add_cascade(label="File", menu=file_menu)
+    root.config(menu=menu_bar)
+
+    # Add a scrolled text widget for editing
+    text_editor = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=100, height=30)
+    text_editor.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+
+    # Run the application
+    root.mainloop()
+
+def main():
    video_path = "Videos/Test.mp4"
    output_audio_path = "Audios/output_audio.wav"
    srt_path = "Captions/captions.srt"
    video_to_captions(video_path, output_audio_path, srt_path)
+   run_gui()
+
+if __name__ == "__main__":
+   main()
