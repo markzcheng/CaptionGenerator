@@ -30,6 +30,28 @@ class CaptionEditor:
         self.text_editor = ScrolledText(root, wrap=tk.WORD, width=100, height=30)
         self.text_editor.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
+        # Buttons Frame
+        button_frame = tk.Frame(root)
+        button_frame.pack(pady=10)
+
+        # Open Button
+        open_button = tk.Button(
+            button_frame, text="Open", command=self.open_file, width=15, height=2
+        )
+        open_button.pack(side=tk.LEFT, padx=5)
+
+        # Save Button
+        save_button = tk.Button(
+            button_frame, text="Save", command=self.save_file, width=15, height=2
+        )
+        save_button.pack(side=tk.LEFT, padx=5)
+
+        # Save Button
+        close_button = tk.Button(
+            button_frame, text="Close", command=exit, width=15, height=2
+        )
+        close_button.pack(side=tk.LEFT, padx=5)
+
     def open_file(self):
         file_path = filedialog.askopenfilename(filetypes=[("SRT Files", "*.srt")])
         if file_path:

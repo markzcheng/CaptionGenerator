@@ -15,13 +15,11 @@ def extract_audio(video_path, audio_path):
    except Exception as e:
        print(f"An error occurred: {e}")
 
-
 def transcribe_audio(audio_path, model_size="base"):
    model = whisper.load_model(model_size)
    result = model.transcribe(audio_path)
    print("Transcription complete.")
    return result["text"], result["segments"]
-
 
 def save_as_srt(segments, output_path):
    subs = pysrt.SubRipFile()
@@ -39,8 +37,6 @@ def save_as_srt(segments, output_path):
    subs.save(output_path, encoding='utf-8')
    print(f"Subtitles saved to: {output_path}")
 
-
-# Convert seconds to hours, minutes, seconds, and milliseconds
 def seconds_to_subrip_time(seconds):
    hours = int(seconds // 3600)
    minutes = int((seconds % 3600) // 60)
@@ -48,31 +44,23 @@ def seconds_to_subrip_time(seconds):
    milliseconds = int((seconds - int(seconds)) * 1000)
    return pysrt.SubRipTime(hours=hours, minutes=minutes, seconds=secs, milliseconds=milliseconds)
 
-
 def video_to_captions(video_path, audio_path, srt_path):
    extract_audio(video_path, audio_path)
    transcription, segments = transcribe_audio(audio_path)
    save_as_srt(segments, srt_path)
 
 def run_gui():
-   # Create the main application window
     root = tk.Tk()
     root.title("Caption Editor")
     app = CaptionEditor(root)
 
-    # Create a menu bar
-    menu_bar = tk.Menu(root)
-    file_menu = tk.Menu(menu_bar, tearoff=0)
-    file_menu.add_command(label="Open", command=app.open_file)
-    file_menu.add_command(label="Save", command=app.save_file)
-    menu_bar.add_cascade(label="File", menu=file_menu)
-    root.config(menu=menu_bar)
+    # menu_bar = tk.Menu(root)
+    # file_menu = tk.Menu(menu_bar, tearoff=0)
+    # file_menu.add_command(label="Open", command=app.open_file)
+    # file_menu.add_command(label="Save", command=app.save_file)
+    # menu_bar.add_cascade(label="File", menu=file_menu)
+    # root.config(menu=menu_bar)
 
-    # Add a scrolled text widget for editing
-    text_editor = scrolledtext.ScrolledText(root, wrap=tk.WORD, width=100, height=30)
-    text_editor.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
-
-    # Run the application
     root.mainloop()
 
 def main():
