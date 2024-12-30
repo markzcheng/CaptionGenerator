@@ -54,13 +54,6 @@ def run_gui():
     root.title("Caption Editor")
     app = CaptionEditor(root)
 
-    # menu_bar = tk.Menu(root)
-    # file_menu = tk.Menu(menu_bar, tearoff=0)
-    # file_menu.add_command(label="Open", command=app.open_file)
-    # file_menu.add_command(label="Save", command=app.save_file)
-    # menu_bar.add_cascade(label="File", menu=file_menu)
-    # root.config(menu=menu_bar)
-
     root.mainloop()
 
 def main():

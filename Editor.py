@@ -36,6 +36,12 @@ class CaptionEditor:
 
         # Open Button
         open_button = tk.Button(
+            button_frame, text="Generate", command=self.open_file, width=15, height=2
+        )
+        open_button.pack(side=tk.LEFT, padx=5)
+
+        # Open Button
+        open_button = tk.Button(
             button_frame, text="Open", command=self.open_file, width=15, height=2
         )
         open_button.pack(side=tk.LEFT, padx=5)
